@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Ethics — Connected Image Tabs</title>
+  <style>
+    :root{
+      --pink:#e72582;
+      --grey:#abb5bf;
+      --dark-blue:#1f2a52;
+      --teal:#00bec7;
+      --light-grey:#f3f4f6;
+      --tab-grey:#e4e7ec;
+      --darker:#2e4d6b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:24px;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--dark-blue);
+      background:var(--light-grey);
+    }
+    .wrap{max-width:1080px; margin:0 auto;}
+
+    /* Tabs */
+    .tabs{display:flex; flex-wrap:wrap; gap:12px; margin:0 auto 12px;}
+    .tab{appearance:none; border:1.5px solid var(--tab-grey); background:var(--tab-grey); color:var(--dark-blue); border-radius:14px; width:178px; height:138px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:8px; overflow:hidden; transition:all .2s ease; position:relative; z-index:1;}
+    .tab:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+    .tab img{width:100%; height:100%; object-fit:cover; border-radius:10px}
+    .tab[aria-selected="true"]{background:#fff; border-color:var(--grey); border-bottom-color:#fff; border-bottom-left-radius:0; border-bottom-right-radius:0; transform:translateY(1px); z-index:3;}
+
+    /* Content card */
+    .card{background:#fff; border:1.5px solid var(--grey); border-radius:14px; box-shadow:0 6px 18px rgba(16,24,40,.06); padding:22px; position:relative; z-index:2;}
+    .tabs + .card{margin-top:-10px;}
+
+    .panel{display:none}
+    .panel.active{display:block}
+
+    h3{margin:0 0 10px; font-size:22px}
+    p{margin:0 0 10px}
+    ol, ul{padding-left:20px; margin:6px 0}
+
+    @media (max-width:720px){.tab{width:46%; height:120px}}
+    @media (max-width:480px){.tab{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="region" aria-label="AI Ethics Activities">
+    <div class="tabs" role="tablist" aria-label="Ethics themes">
+      <button class="tab" role="tab" id="tab-fairness" aria-controls="panel-fairness" aria-selected="true" data-title="Fairness & Bias"><img alt="Fairness & Bias" /></button>
+      <button class="tab" role="tab" id="tab-transparency" aria-controls="panel-transparency" aria-selected="false" data-title="Transparency & Explainability"><img alt="Transparency & Explainability" /></button>
+      <button class="tab" role="tab" id="tab-accountability" aria-controls="panel-accountability" aria-selected="false" data-title="Accountability & Human Oversight"><img alt="Accountability & Human Oversight" /></button>
+      <button class="tab" role="tab" id="tab-privacy" aria-controls="panel-privacy" aria-selected="false" data-title="Privacy & Data Ethics"><img alt="Privacy & Data Ethics" /></button>
+      <button class="tab" role="tab" id="tab-environment" aria-controls="panel-environment" aria-selected="false" data-title="Environmental Impact"><img alt="Environmental Impact" /></button>
+    </div>
+
+    <section class="card" aria-live="polite">
+      <div id="panel-fairness" class="panel active" role="tabpanel" aria-labelledby="tab-fairness">
+        <h3>Fairness &amp; Bias</h3>
+        <p>Fairness ensures AI treats all individuals and groups equally, without prejudice. Bias refers to systematic errors in AI outputs, often from training data, leading to unfair results.</p>
+        <p>AI models learn from data that can contain societal biases. If trained on biased data, AI will perpetuate and amplify these biases in its decisions (e.g., loans, hiring, medical diagnoses).</p>
+        <p><strong>What to consider:</strong> Ask: "Is this AI outcome unfair to any group? Does it show unwarranted favoritism or disadvantage?"</p>
+      </div>
+
+      <div id="panel-transparency" class="panel" role="tabpanel" aria-labelledby="tab-transparency" hidden>
+        <h3>Transparency &amp; Explainability</h3>
+        <p>Transparency means understanding how an AI system works and what data influences its decisions. Explainability is articulating why an AI made a specific decision or output in understandable terms.</p>
+        <p>Many advanced AI models are "black boxes," making their decisions hard to trace. This lack of clarity erodes trust, especially in critical applications. This allows scrutiny, builds confidence, and helps users understand or challenge AI's reasoning.</p>
+        <p><strong>What to consider:</strong> Can you understand why the AI gave this answer? Is its process clear enough to trust the results?</p>
+      </div>
+
+      <div id="panel-accountability" class="panel" role="tabpanel" aria-labelledby="tab-accountability" hidden>
+        <h3>Accountability &amp; Human Oversight</h3>
+        <p>Accountability identifies who is responsible for AI system errors or harm. Human oversight ensures humans maintain control, and are able to intervene, override, or correct AI decisions.</p>
+        <p>As AI becomes more autonomous, the responsibility can become unclear. Clear roles and responsibilities are crucial throughout the AI lifecycle. Human oversight is vital for systems that impact individuals or society, ensuring AI remains a tool under human ethical control.</p>
+        <p><strong>What to consider:</strong> Who is responsible if this AI output causes harm? Is there a clear way for a human to review or override the AI's actions?</p>
+      </div>
+
+      <div id="panel-privacy" class="panel" role="tabpanel" aria-labelledby="tab-privacy" hidden>
+        <h3>Privacy &amp; Data Ethics</h3>
+        <p>Privacy in AI protects sensitive information used by AI systems. Data ethics covers the responsible collection, use, and management of all data fuelling AI, ensuring fairness, security, and respect for rights.</p>
+        <p>AI models rely on vast datasets, often including personal information, raising privacy concerns (collection, storage, training, and potential exposure). Organisations must implement strong data management processes, ensuring data quality, provenance, and security. Ethical data practices are crucial for trustworthy AI, preventing misuse, and respecting individual rights.</p>
+        <p><strong>What to consider:</strong> What data did this AI likely use? Could using this AI or sharing information with it compromise privacy?</p>
+      </div>
+
+      <div id="panel-environment" class="panel" role="tabpanel" aria-labelledby="tab-environment" hidden>
+        <h3>Environmental Impact</h3>
+        <p>AI's environmental impact refers to its ecological footprint, mainly from energy consumption and water usage during development, training, and operation.</p>
+        <p>Training large AI models demands immense energy, often from sources increasing carbon emissions. Data centres also use significant water for cooling. As AI grows, these environmental costs rise. Responsible AI encourages assessing and reducing AI's environmental impact, promoting energy‑efficient designs and renewable energy for sustainable AI.</p>
+        <p><strong>What to consider:</strong> How much energy might this AI system consume? What are the environmental implications, and how can they be minimised?</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Load tab images based on headings (filenames must match headings)
+    document.querySelectorAll('.tab').forEach(btn => {
+      const title = btn.getAttribute('data-title');
+      btn.querySelector('img').src = encodeURIComponent(title) + '.png';
+    });
+
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.panel'));
+
+    function activate(index){
+      tabs.forEach((t,i)=> t.setAttribute('aria-selected', String(i===index)));
+      panels.forEach((p,i)=> p.classList.toggle('active', i===index));
+    }
+
+    tabs.forEach((tab,i)=>{
+      tab.addEventListener('click', ()=>activate(i));
+      tab.addEventListener('keydown', (e)=>{
+        if(e.key==='ArrowRight'){ e.preventDefault(); const n=(i+1)%tabs.length; activate(n); tabs[n].focus(); }
+        if(e.key==='ArrowLeft'){ e.preventDefault(); const n=(i-1+tabs.length)%tabs.length; activate(n); tabs[n].focus(); }
+      });
+    });
+  </script>
+</body>
+</html>
